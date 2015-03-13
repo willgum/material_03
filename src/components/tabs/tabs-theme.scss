@@ -21,7 +21,7 @@ md-tabs.md-THEME_NAME-theme {
       color: '{{primary-color}}';
     }
     &.md-focus {
-      background: '{{accent-color-0.1}}';
+      background: '{{primary-color-0.1}}';
     }
     .md-ripple-container {
       color: '{{accent-100}}';
@@ -59,7 +59,7 @@ md-tabs.md-THEME_NAME-theme {
         color: '{{primary-contrast}}';
       }
       &.md-focus {
-        background: '{{accent-color-0.1}}';
+        background: '{{primary-contrast-0.1}}';
       }
     }
   }
@@ -75,7 +75,7 @@ md-tabs.md-THEME_NAME-theme {
         color: '{{warn-contrast}}';
       }
       &.md-focus {
-        background: '{{accent-color-0.1}}';
+        background: '{{warn-contrast-0.1}}';
       }
     }
   }
