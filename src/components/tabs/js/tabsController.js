@@ -74,7 +74,6 @@
       if (newIndex === oldIndex) return;
       if (!elements.tabs[newIndex]) return;
       adjustOffset();
-      elements.canvas.focus();
     }
 
     function adjustOffset () {
