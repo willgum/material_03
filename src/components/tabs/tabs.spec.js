@@ -199,12 +199,12 @@ describe('<md-tabs>', function() {
       var tabs1 = setup('<md-tabs>' +
                        '<md-tab label="super label"></md-tab>' +
                        '</md-tabs>');
-      expect(tabs1.find('md-tab-item').html()).toBe('super label');
+      expect(tabs1.find('md-tab-item').text()).toBe('super label');
       
       var tabs2 = setup('<md-tabs>' +
                    '<md-tab><md-tab-label><b>super</b> label</md-tab-label></md-tab>' +
                    '</md-tabs>');
-      expect(tabs2.find('md-tab-item').html()).toBe('<b>super</b> label');
+      expect(tabs2.find('md-tab-item').text()).toBe('super label');
 
     });
 
@@ -212,8 +212,8 @@ describe('<md-tabs>', function() {
       var tabs1 = setup('<md-tabs>' + 
                         '<md-tab label="label that!"><b>content</b> that!</md-tab>' +
                         '</md-tabs>');
-      expect(tabs1.find('md-tab-item').html()).toBe('label that!');
-      expect(tabs1[0].querySelector('md-tab-content').innerHTML).toBe('<b>content</b> that!');
+      expect(tabs1.find('md-tab-item').text()).toBe('label that!');
+      expect(tabs1[0].querySelector('md-tab-content').textContent).toBe('content that!');
 
       var tabs2 = setup('<md-tabs>\
         <md-tab>\
@@ -221,9 +221,9 @@ describe('<md-tabs>', function() {
           <md-tab-template><b>content</b> that!</md-tab-template>\
         </md-tab>\
       </md-tabs>');
-      expect(tabs1.find('md-tab-item').html()).toBe('label that!');
-      expect(tabs1[0].querySelector('md-tab-content').innerHTML)
-        .toBe('<b>content</b> that!');
+      expect(tabs1.find('md-tab-item').text()).toBe('label that!');
+      expect(tabs1[0].querySelector('md-tab-content').textContent)
+        .toBe('content that!');
     });
 
   });

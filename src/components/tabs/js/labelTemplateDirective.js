@@ -14,9 +14,8 @@
     function link (scope, element, attr, ctrl) {
       var index = scope.$parent.$index;
       scope.$watch('template', function (html) {
-        var div = angular.element('<div>' + html + '</div>');
-        $compile(div)(ctrl.tabs[index].parent);
-        element.html(div.html());
+        element.html(html);
+        $compile(element.contents())(ctrl.tabs[index].parent);
       });
     }
   }

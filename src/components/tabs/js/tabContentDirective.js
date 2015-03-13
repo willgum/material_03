@@ -14,9 +14,8 @@
       link: link
     };
     function link (scope, element) {
-      var div = angular.element('<div>' + scope.tab.template + '</div>');
-      $compile(div)(scope.tab.parent);
-      element.html(div.html());
+      element.html(scope.tab.template);
+      $compile(element.contents())(scope.tab.parent);
     }
   }
 })();
