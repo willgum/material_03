@@ -22,6 +22,7 @@
     ctrl.offsetLeft = 0;
     ctrl.hasContent = true;
     ctrl.hasFocus = false;
+    ctrl.lastClick = false;
 
     ctrl.attachRipple = attachRipple;
     ctrl.shouldStretchTabs = shouldStretchTabs;
@@ -61,6 +62,7 @@
           $scope.selectedIndex = ctrl.focusIndex;
           break;
       }
+      ctrl.lastClick = false;
       function handleArrowKey (inc) {
         event.preventDefault();
         for (newIndex = ctrl.focusIndex + inc;
@@ -95,7 +97,7 @@
             isActive: function () { return this.getIndex() === $scope.selectedIndex; },
             isLeft:   function () { return this.getIndex() < $scope.selectedIndex; },
             isRight:  function () { return this.getIndex() > $scope.selectedIndex; },
-            hasFocus: function () { return ctrl.hasFocus && this.getIndex() === ctrl.focusIndex; },
+            hasFocus: function () { return !ctrl.lastClick && ctrl.hasFocus && this.getIndex() === ctrl.focusIndex; },
             id:       $mdUtil.nextUid()
           },
           tab = angular.extend(proto, tabData);
@@ -183,6 +185,7 @@
 
     function select (index) {
       ctrl.focusIndex = $scope.selectedIndex = index;
+      ctrl.lastClick = true;
     }
 
     function scroll (event) {
