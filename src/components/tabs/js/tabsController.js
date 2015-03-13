@@ -9,7 +9,6 @@
     var ctrl = this,
         elements = {
           tabs:    $element[0].getElementsByTagName('md-tab-item'),
-          dummies: $element[0].getElementsByTagName('md-dummy-tab'),
           canvas:  $element[0].getElementsByTagName('md-tab-canvas')[0],
           inkBar:  $element[0].getElementsByTagName('md-ink-bar')[0],
           wrapper: $element[0].getElementsByTagName('md-pagination-wrapper')[0]
@@ -22,6 +21,7 @@
     ctrl.focusIndex = null;
     ctrl.offsetLeft = 0;
     ctrl.hasContent = true;
+    ctrl.hasFocus = false;
 
     ctrl.attachRipple = attachRipple;
     ctrl.shouldStretchTabs = shouldStretchTabs;
@@ -32,7 +32,6 @@
     ctrl.scroll = scroll;
     ctrl.nextPage = nextPage;
     ctrl.previousPage = previousPage;
-    ctrl.focus = focus;
     ctrl.keydown = keydown;
     ctrl.canPageForward = canPageForward;
     ctrl.canPageBack = canPageBack;
@@ -47,7 +46,7 @@
       $timeout(updateInkBarStyles, 0, false);
     }
 
-    function keydown (event, data) {
+    function keydown (event) {
       var newIndex;
       switch (event.keyCode) {
         case $mdConstant.KEY_CODE.LEFT_ARROW:
@@ -59,12 +58,11 @@
         case $mdConstant.KEY_CODE.SPACE:
         case $mdConstant.KEY_CODE.ENTER:
           event.preventDefault();
-          $scope.selectedIndex = ctrl.focusIndex = data.getIndex();
+          $scope.selectedIndex = ctrl.focusIndex;
           break;
       }
       function handleArrowKey (inc) {
         event.preventDefault();
-        ctrl.focusIndex = data.getIndex();
         for (newIndex = ctrl.focusIndex + inc;
              ctrl.tabs[newIndex] && ctrl.tabs[newIndex].scope.disabled;
              newIndex += inc) {}
@@ -74,10 +72,9 @@
 
     function handleFocusIndexChange (newIndex, oldIndex) {
       if (newIndex === oldIndex) return;
-      if (!elements.dummies[newIndex]) return;
-      if (angular.isNumber(newIndex)) elements.dummies[newIndex].focus();
-      else if (angular.isNumber(oldIndex)) elements.dummies[oldIndex].blur();
+      if (!elements.tabs[newIndex]) return;
       adjustOffset();
+      elements.canvas.focus();
     }
 
     function adjustOffset () {
@@ -99,7 +96,7 @@
             isActive: function () { return this.getIndex() === $scope.selectedIndex; },
             isLeft:   function () { return this.getIndex() < $scope.selectedIndex; },
             isRight:  function () { return this.getIndex() > $scope.selectedIndex; },
-            hasFocus: function () { return this.getIndex() === ctrl.focusIndex; },
+            hasFocus: function () { return ctrl.hasFocus && this.getIndex() === ctrl.focusIndex; },
             id:       $mdUtil.nextUid()
           },
           tab = angular.extend(proto, tabData);
@@ -129,6 +126,7 @@
       $scope.selectedIndex = getNearestSafeIndex(newValue);
       ctrl.lastSelectedIndex = oldValue;
       updateInkBarStyles();
+      elements.canvas.focus();
     }
 
     function updateInkBarStyles () {
@@ -186,10 +184,6 @@
 
     function select (index) {
       ctrl.focusIndex = $scope.selectedIndex = index;
-    }
-
-    function focus (tab) {
-      ctrl.focusIndex = tab.getIndex();
     }
 
     function scroll (event) {
