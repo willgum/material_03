@@ -1,6 +1,9 @@
 md-fab-toolbar {
   $icon-delay: 200ms;
 
+  // Include the top/left/bottom/right fab positions
+  @include fab-all-positions();
+
   display: block;
 
   /*
