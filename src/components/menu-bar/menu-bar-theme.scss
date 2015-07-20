@@ -1,6 +1,11 @@
 md-toolbar.md-THEME_NAME-theme {
   md-menu-bar button {
     color: '{{foreground-2}}';
+    border-radius: 2px;
+    &:focus {
+      outline: none;
+      background: '{{background-200}}';
+    }
   }
 }
 

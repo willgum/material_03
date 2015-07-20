@@ -2,13 +2,13 @@ md-toolbar.md-menu-toolbar {
   h2.md-toolbar-tools {
     line-height: 1rem;
     height: auto;
-    padding-top: 3.5 * $baseline-grid;
+    padding: 3.5 * $baseline-grid;
     padding-bottom: 1.5 * $baseline-grid;
   }
 }
 
 md-menu-bar {
-  padding: 0 0.75 * $baseline-grid;
+  padding: 0 2.5 * $baseline-grid;
   display: block;
   button {
     font-size: rem(1.4);
