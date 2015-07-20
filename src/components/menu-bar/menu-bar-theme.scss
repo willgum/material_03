@@ -1,0 +1,14 @@
+md-toolbar.md-THEME_NAME-theme {
+  md-menu-bar button {
+    color: '{{foreground-2}}';
+  }
+}
+
+md-toolbar.md-THEME_NAME-theme.md-menu-toolbar {
+  background-color: '{{background-color}}';
+  color: '{{foreground-1}}';
+  md-toolbar-filler {
+    background-color: '{{primary-color}}';
+    color: '{{primary-contrast}}';
+  }
+}
