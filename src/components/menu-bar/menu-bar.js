@@ -3,7 +3,7 @@
  * @name material.components.menu-bar
  */
 
-angular.module('material.components.menu-bar', [
+angular.module('material.components.menuBar', [
   'material.core',
   'material.components.menu'
 ])
@@ -29,7 +29,6 @@ function MenuBarCtrl($element, $attrs, $mdConstant, $document, $mdUtil) {
 }
 
 MenuBarCtrl.prototype.init = function() {
-  console.log("Init");
   this.$element.on('keydown', angular.bind(this, this.handleKeyDown));
 };
 
@@ -46,14 +45,19 @@ MenuBarCtrl.prototype.focusMenu = function(direction) {
   var menus = this.getMenus();
   var focusedIndex = this.getFocusedMenuIndex();
 
+  var changed = false;
+
   if (focusedIndex == -1) { focusedIndex = 0; }
   else if (
     direction < 0 && focusedIndex > 0 ||
     direction > 0 && focusedIndex < menus.length - direction
   ) {
     focusedIndex += direction;
+    changed = true;
   }
-  menus[focusedIndex].querySelector('button').focus();
+  if (changed) {
+    menus[focusedIndex].querySelector('button').focus();
+  }
 };
 
 MenuBarCtrl.prototype.openFocusedMenu = function() {
